@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Jalastin/Kanji-Site/issues"
   },
-  "homepage": "https://github.com/Jalastin/Kanji-Site#readme"
+  "homepage": "https://github.com/Jalastin/Kanji-Site#readme",
+  "dependencies": {
+    "semantic-ui-react": "^2.0.4"
+  }
 }

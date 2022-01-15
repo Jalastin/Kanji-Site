@@ -1,0 +1,30 @@
+{
+    "kanji_data": {
+        "一": {
+            "words": {
+                "一時" : {
+                    "pronunciation" : "ichiji",
+                    "meaning" : ["one o'clock"]
+                }
+            },
+            "sentences": [],
+            "sources" : ["Genki"],
+            "jlpt" : 7,
+            "grade level" : 12,
+            "stroke number" : 1
+        },
+        "二": {
+            "words": {
+                "二時" : {
+                    "pronunciation" : ["niji", "にじ"],
+                    "meaning" : ["two o'clock"]
+                }
+            },
+            "sentences": [],
+            "sources" : ["Genki"],
+            "jlpt" : 1,
+            "grade level" : 1,
+            "stroke number" : 1
+        }
+    }
+}

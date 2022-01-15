@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import Kanji_Selector from './Kanji_Selector';
 
 function App() {
   return (
@@ -7,8 +8,9 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Wassup b
+          Bepis
         </p>
+        <Kanji_Selector/>
         <a
           className="App-link"
           href="https://reactjs.org"
