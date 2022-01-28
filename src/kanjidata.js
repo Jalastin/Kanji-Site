@@ -7,9 +7,14 @@ export default [
                 "meaning" : ["one o'clock"]
             }
         },
-        "sentences": [],
-        "sources" : ["Genki"],
-        "jlpt" : 1,
+        "sentences": [[["昨日、一時に起きました。", 
+        "きのう、いちじにおきました。", 
+        "Yesterday I woke up at 1 o'clock."],
+        ["明日、一時にスーパーに行きたいです。",
+        "あした、いちじにスーパーにいきたいです。",
+        "Tomorrow I want to go to the supermarket at 1 o'clock."]]],
+        "sources" : [["Genki", 3]],
+        "jlpt" : 5,
         "grade level" : 1,
         "stroke number" : 1
     },
@@ -22,7 +27,7 @@ export default [
             }
         },
         "sentences": [],
-        "sources" : ["Genki"],
+        "sources" : [["Genki", 2]],
         "jlpt" : 1,
         "grade level" : 1,
         "stroke number" : 1
