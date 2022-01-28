@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import Kanji_Selector from './Kanji_Selector';
+import { RecoilRoot } from "recoil";
+import Kanji_Card from './Kanji_Card';
 
 function App() {
   return (
@@ -8,9 +9,11 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Bepis
+          God Please work
         </p>
-        <Kanji_Selector/>
+        <RecoilRoot>
+          <Kanji_Card/>
+        </RecoilRoot>
         <a
           className="App-link"
           href="https://reactjs.org"
