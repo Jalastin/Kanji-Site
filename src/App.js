@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { RecoilRoot } from "recoil";
 import Kanji_Card from './Kanji_Card';
+import Kanji_Selector from './Kanji_Selector';
 
 function App() {
   return (
@@ -9,10 +10,11 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          God Please work
+          Scuffed Kanji Flashcards PepeL
         </p>
         <RecoilRoot>
-          <Kanji_Card/>
+          <Kanji_Selector/>
+          {/* <Kanji_Card id="ー"/> */}
         </RecoilRoot>
         <a
           className="App-link"

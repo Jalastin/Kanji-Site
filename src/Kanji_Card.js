@@ -3,15 +3,17 @@ import { useRecoilState } from 'recoil';
 import { kanjiStateAtom } from "./kanjiAtom.js"; 
 import { getKanjiCard } from "./getKanjiCard.js";
 
-const Kanji_Card = () => {
+const Kanji_Card = ({id}) => {
     console.log("test");
+    console.log("id: " + id);
     const [kanji, setKanji] = useRecoilState(kanjiStateAtom);
 
     async function setKanjiState() {
-        const kanjiData = await getKanjiCard("ー");
+        const kanjiData = await getKanjiCard(id);
         console.log("kanjiData: " + kanjiData);
         setKanji(kanjiData);
     }
+    
     return (
         <div>
             <button onClick={setKanjiState}> getKanjiCard Button</button>
