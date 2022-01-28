@@ -4,7 +4,6 @@ import { kanjiStateAtom } from "./kanjiAtom.js";
 import { getKanjiCard } from "./getKanjiCard.js";
 
 const Kanji_Card = ({id}) => {
-    console.log("test");
     console.log("id: " + id);
     const [kanji, setKanji] = useRecoilState(kanjiStateAtom);
 
