@@ -12,10 +12,8 @@ function App() {
         <p>
           Scuffed Kanji Flashcards PepeL
         </p>
-        <RecoilRoot>
-          <Kanji_Selector/>
-          {/* <Kanji_Card id="ー"/> */}
-        </RecoilRoot>
+        <Kanji_Selector/>
+        {/* <Kanji_Card id="ー"/> */}
         <a
           className="App-link"
           href="https://reactjs.org"

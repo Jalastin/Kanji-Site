@@ -1,22 +1,36 @@
-import React from "react";
-import { useRecoilState } from 'recoil';
-import { kanjiStateAtom } from "./kanjiAtom.js"; 
-import { getKanjiCard } from "./getKanjiCard.js";
+import React, {useState, useEffect} from "react";
+import {doc, onSnapshot} from "firebase/firestore";
+import { dbConfig } from "./dbConfig.js";
 
 const Kanji_Card = ({id}) => {
+    // https://firebase.google.com/docs/firestore/query-data/listen
+    // https://benmcmahen.com/using-firebase-with-react-hooks/
     console.log("id: " + id);
-    const [kanji, setKanji] = useRecoilState(kanjiStateAtom);
+    const [error, setError] = React.useState(false);
+    const [loading, setLoading] = React.useState(true);
+    const [kanji, setKanji] = React.useState([]);
+    const [kanjiId, setKanjiId] = React.useState([]);
 
-    async function setKanjiState() {
-        const kanjiData = await getKanjiCard(id);
-        console.log("kanjiData: " + kanjiData);
-        setKanji(kanjiData);
-    }
+    useEffect(() => {
+        const unsubscribe = onSnapshot(doc(dbConfig, "kanji-site", id), (doc) => {
+                setLoading(false);
+                console.log(doc.data());
+                setKanji(doc.data());
+                setKanjiId(doc.id);
+            },
+            err => {
+                setError(err);
+            }
+        )
+        return () => unsubscribe()
+    }, [id])
     
     return (
         <div>
-            <button onClick={setKanjiState}> getKanjiCard Button</button>
-            Stroke Order: {kanji.stroke_number}
+            <div>Kanji: {kanjiId}</div>
+            <div>Stroke Order: {kanji.stroke_number}</div>
+            <div>JLPT: {kanji.jlpt}</div>
+            <br/>
         </div>
     )
 }
