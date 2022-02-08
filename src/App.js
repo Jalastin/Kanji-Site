@@ -1,30 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
-import { RecoilRoot } from "recoil";
-import Kanji_Card from './Kanji_Card';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Kanji_Creator from './Kanji_Creator';
 import Kanji_Selector from './Kanji_Selector';
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Scuffed Kanji Flashcards PepeL
-        </p>
-        <Kanji_Selector/>
-        {/* <Kanji_Card id="ー"/> */}
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Kanji_Selector/>} />
+        <Route path="/play" element={<Kanji_Creator/>}/>
+      </Routes>
+    </Router>
   );
 }
-
-export default App;
