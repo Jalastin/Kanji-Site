@@ -20,7 +20,6 @@ const Kanji_Selector = () => {
                 count += 1;
             });
             setCheckedState(new Array(count).fill(false));
-            setKarray(new Array(count));
         }
         getIds();
     }, [])
@@ -32,13 +31,14 @@ const Kanji_Selector = () => {
         var updatedCheckedState = new Array(checkedState.length);
         for (let index in checkedState) {
             if (index === position) {
+                console.log(checkedState[index] + " is now " + !checkedState[index]);
                 updatedCheckedState[index] = !checkedState[index];
             } else {
                 updatedCheckedState[index] = checkedState[index];
             }
         }
-
-        setCheckedState(updatedCheckedState);
+        console.log("updatedCheckedState: " + updatedCheckedState);
+        
         // const updatedKarray = karray.map((item, index) => {
         //     if (checkedState[index]) {
         //         item = kanji[index];
@@ -49,17 +49,28 @@ const Kanji_Selector = () => {
         // const updatedKarray = karray.map((item, index) => 
         //     checkedState[index] ? kanji[index] : null
         // );
-        var updatedKarray = new Array(karray.length);
-        for (let index in karray) {
-            if (checkedState[index]) {
-                updatedKarray = kanji[index];
-            } else {
-                ;
+        // var updatedKarray = new Array(karray.length);
+        var updatedKarray = [];
+        for (let index in updatedCheckedState) {
+            // if (updatedCheckedState[index] == true) {
+            //     console.log(updatedKarray[index] + " is now " + kanji[index]);
+            //     updatedKarray[index] = kanji[index];
+            // } else {
+            //     ;
+            // }
+            console.log("cur ucs: " + updatedCheckedState[index]);
+            if (updatedCheckedState[index] == true) {
+                console.log("index " + index + " is true");
+                updatedKarray.push(kanji[index]);
             }
         }
+        console.log("updatedKarray: " + updatedKarray);
+
+        setCheckedState(updatedCheckedState);
+        console.log("hello?");
         setKarray(updatedKarray);
-        console.log("checkedState: " + checkedState);
-        console.log("karray: " + karray);
+        // console.log("checkedState: " + checkedState);
+        // console.log("karray: " + karray);
       };
 
     // console.log(kanji);
