@@ -10,6 +10,9 @@ const Kanji_Creator = () => {
 
     // https://www.geeksforgeeks.org/how-to-perform-fetch-and-send-with-firestore-using-reactjs/
     const final = [];
+    if (kanjistate.length == 0) {
+        final.push(<div>You didn't add any cards!</div>);
+    }
     for (let kanji in kanjistate) {
         final.push(<Kanji_Card id={kanjistate[kanji]}/>);
     }
