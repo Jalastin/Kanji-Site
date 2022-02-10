@@ -1,14 +1,16 @@
 import React from "react";
 import Kanji_Card from "./Kanji_Card";
 import { Link } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { kanjiStateAtom } from "./kanjiAtom";
 
 const Kanji_Creator = () => {
+    const [kanjistate, setKanjiState] = useRecoilState(kanjiStateAtom);
 
     // https://www.geeksforgeeks.org/how-to-perform-fetch-and-send-with-firestore-using-reactjs/
-    const data = ["ー","二"];
     const final = [];
-    for (let kanji in data) {
-        final.push(<Kanji_Card id={data[kanji]}/>);
+    for (let kanji in kanjistate) {
+        final.push(<Kanji_Card id={kanjistate[kanji]}/>);
     }
     return (
         <div>

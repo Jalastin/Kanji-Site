@@ -2,11 +2,14 @@ import React, {useState, useEffect} from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { dbConfig } from "./dbConfig";
 import { Link } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { kanjiStateAtom } from "./kanjiAtom";
 
 const Kanji_Selector = () => {
     const [kanji, setKanji] = React.useState([]);
     const [checkedState, setCheckedState] = useState([]);
     const [karray, setKarray] = React.useState([]);
+    const [kanjistate, setKanjiState] = useRecoilState(kanjiStateAtom);
 
     // https://stackoverflow.com/questions/61178920/react-useeffect-to-get-firestore-data-once
     useEffect(() => {
@@ -25,49 +28,29 @@ const Kanji_Selector = () => {
     }, [])
 
     const handleOnChange = (position) => {
-        // const updatedCheckedState = checkedState.map((item, index) =>
-        //     index === position ? !item : item
-        // );
         var updatedCheckedState = new Array(checkedState.length);
         for (let index in checkedState) {
             if (index === position) {
-                console.log(checkedState[index] + " is now " + !checkedState[index]);
+                // console.log(checkedState[index] + " is now " + !checkedState[index]);
                 updatedCheckedState[index] = !checkedState[index];
             } else {
                 updatedCheckedState[index] = checkedState[index];
             }
         }
-        console.log("updatedCheckedState: " + updatedCheckedState);
+        // console.log("updatedCheckedState: " + updatedCheckedState);
         
-        // const updatedKarray = karray.map((item, index) => {
-        //     if (checkedState[index]) {
-        //         item = kanji[index];
-        //     } else {
-        //         item = null;
-        //     }
-        // });
-        // const updatedKarray = karray.map((item, index) => 
-        //     checkedState[index] ? kanji[index] : null
-        // );
-        // var updatedKarray = new Array(karray.length);
         var updatedKarray = [];
         for (let index in updatedCheckedState) {
-            // if (updatedCheckedState[index] == true) {
-            //     console.log(updatedKarray[index] + " is now " + kanji[index]);
-            //     updatedKarray[index] = kanji[index];
-            // } else {
-            //     ;
-            // }
-            console.log("cur ucs: " + updatedCheckedState[index]);
+            // console.log("cur ucs: " + updatedCheckedState[index]);
             if (updatedCheckedState[index] == true) {
-                console.log("index " + index + " is true");
+                // console.log("index " + index + " is true");
                 updatedKarray.push(kanji[index]);
             }
         }
-        console.log("updatedKarray: " + updatedKarray);
+        // console.log("updatedKarray: " + updatedKarray);
 
         setCheckedState(updatedCheckedState);
-        console.log("hello?");
+        // console.log("hello?");
         setKarray(updatedKarray);
         // console.log("checkedState: " + checkedState);
         // console.log("karray: " + karray);
@@ -96,7 +79,6 @@ const Kanji_Selector = () => {
     const final = [];
     for (let item in kanji) {
         // console.log(kanji[item]);
-        // <input type="checkbox" id={kanji[item]} name={kanji[item]} value={kanji[item]}>{kanji[item]}</input>
         final.push(<Checkbox label={kanji[item]} index={item}/>);
     }
 
@@ -105,11 +87,9 @@ const Kanji_Selector = () => {
             {final}
             <br/>
             <div>
-                Current truths: {checkedState}
-                <br/>
                 Current selected: {karray}
             </div>
-            <Link to="/play">Play</Link>
+            <Link to="/play" onClick={setKanjiState(karray)}>Play</Link>
         </div>
     )
 }
