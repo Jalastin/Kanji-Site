@@ -13,18 +13,32 @@ const Kanji_Selector = () => {
 
     // https://stackoverflow.com/questions/61178920/react-useeffect-to-get-firestore-data-once
     useEffect(() => {
+        var count = 0;
         const getIds = async() => {
             const querySnapshot = await getDocs(collection(dbConfig, "kanji-site"));
-            var count = 0;
             querySnapshot.forEach((doc) => {
                 // https://thewebdev.info/2021/03/13/how-to-push-or-append-an-element-to-a-state-array-with-react-hooks/
                 setKanji((oldkanji) => oldkanji.concat(doc.id));
                 // console.log(doc.id, " => ", doc.data());
                 count += 1;
             });
-            setCheckedState(new Array(count).fill(false));
+            var newCheckedState = new Array(count).fill(false);
+            setCheckedState(newCheckedState);
         }
+        console.log("kanjistate: " + kanjistate);
         getIds();
+        
+        // var newCheckedState = checkedState;
+        // for (let index in kanji) {
+        //     if (kanjistate.includes(kanji[index])) {
+        //         console.log(kanji[index] + " in " + kanjistate);
+        //         newCheckedState[index] = true;
+        //     } else {
+        //         console.log(kanji[index] + " not in " + kanjistate);
+        //         newCheckedState[index] = false;
+        //     }
+        // }
+        // setCheckedState(newCheckedState);
     }, [])
 
     const handleOnChange = (position) => {
