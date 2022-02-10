@@ -13,32 +13,27 @@ const Kanji_Selector = () => {
 
     // https://stackoverflow.com/questions/61178920/react-useeffect-to-get-firestore-data-once
     useEffect(() => {
-        var count = 0;
         const getIds = async() => {
+            var newCheckedState = [];
+            var newKarray = [];
             const querySnapshot = await getDocs(collection(dbConfig, "kanji-site"));
             querySnapshot.forEach((doc) => {
                 // https://thewebdev.info/2021/03/13/how-to-push-or-append-an-element-to-a-state-array-with-react-hooks/
                 setKanji((oldkanji) => oldkanji.concat(doc.id));
                 // console.log(doc.id, " => ", doc.data());
-                count += 1;
+                
+                console.log("kanjistate: " + kanjistate);
+                if (kanjistate.includes(doc.id)) {
+                    newCheckedState.push(true);
+                    newKarray.push(doc.id);
+                } else {
+                    newCheckedState.push(false);
+                }
             });
-            var newCheckedState = new Array(count).fill(false);
             setCheckedState(newCheckedState);
+            setKarray(newKarray);
         }
-        console.log("kanjistate: " + kanjistate);
         getIds();
-        
-        // var newCheckedState = checkedState;
-        // for (let index in kanji) {
-        //     if (kanjistate.includes(kanji[index])) {
-        //         console.log(kanji[index] + " in " + kanjistate);
-        //         newCheckedState[index] = true;
-        //     } else {
-        //         console.log(kanji[index] + " not in " + kanjistate);
-        //         newCheckedState[index] = false;
-        //     }
-        // }
-        // setCheckedState(newCheckedState);
     }, [])
 
     const handleOnChange = (position) => {
