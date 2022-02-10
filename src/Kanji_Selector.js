@@ -4,12 +4,14 @@ import { dbConfig } from "./dbConfig";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { kanjiStateAtom } from "./kanjiAtom";
+import { isEmpty } from "@firebase/util";
 
 const Kanji_Selector = () => {
     const [kanji, setKanji] = React.useState([]);
     const [checkedState, setCheckedState] = useState([]);
     const [karray, setKarray] = React.useState([]);
     const [kanjistate, setKanjiState] = useRecoilState(kanjiStateAtom);
+    const [checked, setChecked] = useState(false);
 
     // https://stackoverflow.com/questions/61178920/react-useeffect-to-get-firestore-data-once
     useEffect(() => {
@@ -22,7 +24,7 @@ const Kanji_Selector = () => {
                 setKanji((oldkanji) => oldkanji.concat(doc.id));
                 // console.log(doc.id, " => ", doc.data());
                 
-                console.log("kanjistate: " + kanjistate);
+                // console.log("kanjistate: " + kanjistate);
                 if (kanjistate.includes(doc.id)) {
                     newCheckedState.push(true);
                     newKarray.push(doc.id);
@@ -63,12 +65,29 @@ const Kanji_Selector = () => {
         setKarray(updatedKarray);
         // console.log("checkedState: " + checkedState);
         // console.log("karray: " + karray);
-      };
+    };
+    
+    const uncheckAll = () => {
+        const resetCheckedState = new Array(checkedState.length).fill(false);
+        setCheckedState(resetCheckedState);
+        setKarray([]);
+        setChecked(false);
+    }
+
+    const checkAll = () => {
+        var filledKarray = [];
+        for (let index in kanji) {
+            filledKarray.push(kanji[index]);
+        }
+        const fillCheckedState = new Array(checkedState.length).fill(true);
+        setCheckedState(fillCheckedState);
+        setKarray(filledKarray);
+        setChecked(true);
+    }
 
     // console.log(kanji);
     // https://www.freecodecamp.org/news/how-to-work-with-multiple-checkboxes-in-react/
     // https://www.robinwieruch.de/react-checkbox/
-
     const Checkbox = ({ label, index }) => {
     return (
         <label>
@@ -98,6 +117,7 @@ const Kanji_Selector = () => {
             <div>
                 Current selected: {karray}
             </div>
+            <button onClick={checked ? uncheckAll : checkAll}>Check/Uncheck All</button>
             <Link to="/play" onClick={setKanjiState(karray)}>Play</Link>
         </div>
     )
