@@ -10,6 +10,7 @@ const Kanji_Card = ({id}) => {
     const [loading, setLoading] = React.useState(true);
     const [kanji, setKanji] = React.useState([]);
     const [kanjiId, setKanjiId] = React.useState([]);
+    const [wordmap, setWordmap] = React.useState([]);
 
     useEffect(() => {
         const unsubscribe = onSnapshot(doc(dbConfig, "kanji-site", id), (doc) => {
@@ -17,6 +18,15 @@ const Kanji_Card = ({id}) => {
                 // console.log(doc.data());
                 setKanji(doc.data());
                 setKanjiId(doc.id);
+                // https://stackoverflow.com/questions/40950546/react-js-right-way-to-iterate-over-object-instead-of-object-entries
+                var newwordmap = new Map();
+                console.log(doc.data().word);
+                Object.entries(doc.data().word).map(([key,value]) => {
+                    console.log(key);
+                    console.log(value);
+                    newwordmap.set(key, value);
+                })
+                setWordmap(newwordmap);
             },
             err => {
                 setError(err);
@@ -25,11 +35,16 @@ const Kanji_Card = ({id}) => {
         return () => unsubscribe()
     }, [id])
     
+    const words = wordmap.map((item) => 
+        <div>Word: {item}</div>
+    );
+
     return (
         <div>
             <div>Kanji: {kanjiId}</div>
             <div>Stroke Order: {kanji.stroke_number}</div>
             <div>JLPT: {kanji.jlpt}</div>
+            {/* {words} */}
             <br/>
         </div>
     )

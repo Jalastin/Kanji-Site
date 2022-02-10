@@ -4,7 +4,6 @@ import { dbConfig } from "./dbConfig";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { kanjiStateAtom } from "./kanjiAtom";
-import { isEmpty } from "@firebase/util";
 
 const Kanji_Selector = () => {
     const [kanji, setKanji] = React.useState([]);

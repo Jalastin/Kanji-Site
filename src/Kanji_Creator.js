@@ -6,7 +6,7 @@ import { kanjiStateAtom } from "./kanjiAtom";
 
 const Kanji_Creator = () => {
     const [kanjistate, setKanjiState] = useRecoilState(kanjiStateAtom);
-    console.log("kanjistate: " + kanjistate);
+    // console.log("kanjistate: " + kanjistate);
 
     // https://www.geeksforgeeks.org/how-to-perform-fetch-and-send-with-firestore-using-reactjs/
     const final = [];
