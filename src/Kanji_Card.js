@@ -35,16 +35,20 @@ const Kanji_Card = ({id}) => {
         return () => unsubscribe()
     }, [id])
     
-    const words = wordmap.map((item) => 
-        <div>Word: {item}</div>
-    );
+    // const words = wordmap.map((item) => 
+    //     <div>Word: {item}</div>
+    // );
 
     return (
         <div>
             <div>Kanji: {kanjiId}</div>
             <div>Stroke Order: {kanji.stroke_number}</div>
             <div>JLPT: {kanji.jlpt}</div>
-            {/* {words} */}
+            {typeof(kanji.word) !== 'undefined' && kanji.word != null ? Object.entries(kanji.word).map(([key,value]) => {
+                    return (
+                        <div>Word: {key}</div>
+                    );
+                }) : ""}
             <br/>
         </div>
     )
