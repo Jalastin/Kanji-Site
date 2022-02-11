@@ -116,7 +116,12 @@ const Kanji_Selector = () => {
             <div>
                 Current selected: {karray}
             </div>
-            <button onClick={checked ? uncheckAll : checkAll}>Check/Uncheck All</button>
+            {checked ?
+                <button onClick={uncheckAll}> Uncheck All </button>
+            :
+                <button onClick={checkAll}> Check All </button>
+            }
+            {/* <button onClick={checked ? uncheckAll : checkAll}> Check/Uncheck All </button> */}
             <Link to="/play" onClick={setKanjiState(karray)}>Play</Link>
         </div>
     )
