@@ -36,6 +36,7 @@ const Kanji_Card = ({id}) => {
             <div>JLPT: {kanji.jlpt}</div> */}
             {typeof(kanji.word) !== 'undefined' && kanji.word != null ? Object.entries(kanji.word).map(([key,value]) => {
                     if (counterstate.includes(key) === false) {
+                        // https://github.com/facebookexperimental/Recoil/issues/619
                         setCounterState([...counterstate,key,]);
                         console.log("counterstate: "+counterstate);
                     }
