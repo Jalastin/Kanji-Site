@@ -1,36 +1,17 @@
 import React, {useState, useEffect} from "react";
 import { isKatakana, isRomaji, toHiragana } from "wanakana";
 import { useRecoilState } from "recoil";
-import { counterStateAtom, appendArrayToCounter } from "./counterAtom.js";
+import { counterStateAtom } from "./counterAtom.js";
 
 const Word_Card = ({id, kanji, word, pronunciation, meaning}) => {
     const [correct, setCorrect] = React.useState("Input the correct pronunciation here!");
     const [showmeaning, setShowMeaning] = React.useState("");
     const [counterstate, setCounterState] = useRecoilState(counterStateAtom);
     
-    useEffect(() => {
-      // if (counterstate.length() == 0) {
-      //   var temp = counterstate;
-      //   temp.push(id);
-      //   temp.push("");
-      //   setCounterState(temp);
-      // } else {
-      //   var temp = counterstate;
-      //   temp[counterstate.length()-1] = id;
-      //   temp.push("");
-      // }
-
-      // var temp = counterstate;
-      // console.log("counterstate: "+counterstate);
-      // temp.push(id);
-      // setCounterState(temp);
-
-      // const temp = [id];
-      // appendArrayToCounter(temp);
-
-      setCounterState([...counterstate,id,]);
-    }, [])
-    console.log("counterstate: "+counterstate);
+    // useEffect(() => {
+    //   setCounterState([...counterstate,id,]);
+    // }, [])
+    // console.log("counterstate: "+counterstate);
 
     // https://stackoverflow.com/questions/31272207/to-call-onchange-event-after-pressing-enter-key
     // https://thewebdev.info/2021/09/25/how-to-get-input-text-field-values-when-enter-key-is-pressed-in-react/
