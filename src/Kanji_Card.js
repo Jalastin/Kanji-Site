@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {doc, onSnapshot} from "firebase/firestore";
 import { dbConfig } from "./dbConfig.js";
-import Word_Section from "./Word_Section.js";
+import Word_Card from "./Word_Card.js";
 
 const Kanji_Card = ({id}) => {
     // https://firebase.google.com/docs/firestore/query-data/listen
@@ -29,12 +29,11 @@ const Kanji_Card = ({id}) => {
 
     return (
         <div>
-            <div>Kanji: {kanjiId}</div>
             {/* <div>Stroke Order: {kanji.stroke_number}</div>
             <div>JLPT: {kanji.jlpt}</div> */}
             {typeof(kanji.word) !== 'undefined' && kanji.word != null ? Object.entries(kanji.word).map(([key,value]) => {
                     return (
-                        <Word_Section word={key} pronunciation={value.pronunciation}/>
+                        <Word_Card kanji={kanjiId} word={key} pronunciation={value.pronunciation} meaning={value.meaning}/>
                     );
                 }) : ""}
             <br/>
