@@ -4,12 +4,14 @@ import { dbConfig } from "./dbConfig";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { kanjiStateAtom } from "./kanjiAtom";
+import { counterStateAtom } from "./counterAtom";
 
 const Kanji_Selector = () => {
     const [kanji, setKanji] = React.useState([]);
     const [checkedState, setCheckedState] = useState([]);
     const [karray, setKarray] = React.useState([]);
     const [kanjistate, setKanjiState] = useRecoilState(kanjiStateAtom);
+    const [counterstate, setCounterState] = useRecoilState(counterStateAtom);
     const [checked, setChecked] = useState(false);
 
     // https://stackoverflow.com/questions/61178920/react-useeffect-to-get-firestore-data-once
@@ -109,6 +111,11 @@ const Kanji_Selector = () => {
         final.push(<Checkbox label={kanji[item]} index={item}/>);
     }
 
+    const setStates = () => {
+        setKanjiState(karray);
+        setCounterState(0);
+    }
+
     return (
         <div>
             {final}
@@ -122,7 +129,7 @@ const Kanji_Selector = () => {
                 <button onClick={checkAll}> Check All </button>
             }
             {/* <button onClick={checked ? uncheckAll : checkAll}> Check/Uncheck All </button> */}
-            <Link to="/play" onClick={setKanjiState(karray)}>Play</Link>
+            <Link to="/play" onClick={setStates}>Play</Link>
         </div>
     )
 }

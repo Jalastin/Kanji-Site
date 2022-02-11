@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import {doc, onSnapshot} from "firebase/firestore";
 import { dbConfig } from "./dbConfig.js";
 import Word_Card from "./Word_Card.js";
+import { useRecoilState } from "recoil";
+import { counterStateAtom } from "./counterAtom.js";
 
 const Kanji_Card = ({id}) => {
     // https://firebase.google.com/docs/firestore/query-data/listen
@@ -11,6 +13,8 @@ const Kanji_Card = ({id}) => {
     const [loading, setLoading] = React.useState(true);
     const [kanji, setKanji] = React.useState([]);
     const [kanjiId, setKanjiId] = React.useState([]);
+    const [counterstate, setCounterState] = useRecoilState(counterStateAtom);
+    var counter = 0;
 
     useEffect(() => {
         const unsubscribe = onSnapshot(doc(dbConfig, "kanji-site", id), (doc) => {
@@ -27,13 +31,22 @@ const Kanji_Card = ({id}) => {
         return () => unsubscribe()
     }, [id])
 
+    const setId = () => {
+        // const counter = counterstate;
+        // const counterplus = counterstate + 1;
+        // setCounterState(counterplus);
+        return counter++;
+    }
+
     return (
         <div>
             {/* <div>Stroke Order: {kanji.stroke_number}</div>
             <div>JLPT: {kanji.jlpt}</div> */}
             {typeof(kanji.word) !== 'undefined' && kanji.word != null ? Object.entries(kanji.word).map(([key,value]) => {
+                    // var counter = counterstate;
+                    // setCounterState(counter+1);
                     return (
-                        <Word_Card kanji={kanjiId} word={key} pronunciation={value.pronunciation} meaning={value.meaning}/>
+                        <Word_Card id={setId()} kanji={kanjiId} word={key} pronunciation={value.pronunciation} meaning={value.meaning}/>
                     );
                 }) : ""}
             <br/>
