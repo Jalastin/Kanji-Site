@@ -15,16 +15,19 @@ const Word_Card = ({id, kanji, word, pronunciation, meaning}) => {
     // }, [])
     // console.log("counterstate: "+counterstate);
     useEffect(() => {
-      // console.log(typeof counterstate);
+      console.log(typeof counterstate);
       // console.log(Object.keys(counterstate).length);
-      const len = Object.keys(counterstate).length;
-      const otoa = Object.keys(counterstate);
-      console.log("otoa.indexOf(id): " + otoa.indexOf(id));
-      const i = otoa.indexOf(id);
-      if (i == 0) {
+      const len = Object.values(counterstate).length;
+      const otoa = Object.values(counterstate);
+      const i = otoa.findIndex( counterstate => counterstate === id);
+      console.log("counterstate: "+counterstate);
+      console.log("otoa: "+otoa);
+      console.log("id: "+id);
+      console.log("i: "+i);
+      if (i === 0) {
         console.log("otoa[id+1]"+otoa[id+1]);
         setNext(otoa[id+1]);
-      } else if (id == len-1) {
+      } else if (i === (len-1)) {
         console.log("otoa[id-1]"+otoa[id-1]);
         setPrev(otoa[id-1]);
       } else {
@@ -87,6 +90,7 @@ const Word_Card = ({id, kanji, word, pronunciation, meaning}) => {
             <div>{showmeaning}</div>
             <div>Prev: {prev}</div>
             <div>Next: {next}</div>
+            <br/>
         </div>
     )
 }
