@@ -7,8 +7,8 @@ const Word_Card = ({id, kanji, word, pronunciation, meaning}) => {
     const [correct, setCorrect] = React.useState("Input the correct pronunciation here!");
     const [showmeaning, setShowMeaning] = React.useState("");
     const [counterstate, setCounterState] = useRecoilState(counterStateAtom);
-    const [prev, setPrev] = useState("");
-    const [next, setNext] = useState("");
+    const [prev, setPrev] = useState("none");
+    const [next, setNext] = useState("none");
     
     // useEffect(() => {
     //   setCounterState([...counterstate,id,]);
@@ -24,18 +24,33 @@ const Word_Card = ({id, kanji, word, pronunciation, meaning}) => {
       console.log("otoa: "+otoa);
       console.log("id: "+id);
       console.log("i: "+i);
-      if (i === 0) {
-        console.log("otoa[id+1]"+otoa[id+1]);
-        setNext(otoa[id+1]);
-      } else if (i === (len-1)) {
-        console.log("otoa[id-1]"+otoa[id-1]);
-        setPrev(otoa[id-1]);
-      } else {
-        console.log("otoa[id+1]"+otoa[id+1]);
-        console.log("otoa[id-1]"+otoa[id-1]);
-        setNext(otoa[id+1]);
-        setPrev(otoa[id-1]);
+
+      for (let index in otoa) {
+        // if (otoa[index+1] === id) {
+        //   setPrev(otoa[index]);
+        // } else if (otoa[index-1] === id) {
+        //   setNext(otoa[index]);
+        // }
+
+        if (index + 1 == i) {
+          setPrev(otoa[index]);
+        } else if (index - 1 == i) {
+          setNext(otoa[index]);
+        }
       }
+
+      // if (i === 0) {
+      //   console.log("otoa[id+1]"+otoa[id+1]);
+      //   setNext(otoa[id+1]);
+      // } else if (i === (len-1)) {
+      //   console.log("otoa[id-1]"+otoa[id-1]);
+      //   setPrev(otoa[id-1]);
+      // } else {
+      //   console.log("otoa[id+1]"+otoa[id+1]);
+      //   console.log("otoa[id-1]"+otoa[id-1]);
+      //   setNext(otoa[id+1]);
+      //   setPrev(otoa[id-1]);
+      // }
 
       // const i = counterstate.indexOf(id);
       // if (i == 0) {
