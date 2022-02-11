@@ -4,7 +4,7 @@ import { dbConfig } from "./dbConfig";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { kanjiStateAtom } from "./kanjiAtom";
-import { counterStateAtom } from "./counterAtom";
+import { counterStateAtom, resetArray } from "./counterAtom";
 
 const Kanji_Selector = () => {
     const [kanji, setKanji] = React.useState([]);
@@ -113,7 +113,8 @@ const Kanji_Selector = () => {
 
     const setStates = () => {
         setKanjiState(karray);
-        setCounterState(0);
+        setChecked([]);
+        // resetArray();
     }
 
     return (

@@ -13,8 +13,7 @@ const Kanji_Card = ({id}) => {
     const [loading, setLoading] = React.useState(true);
     const [kanji, setKanji] = React.useState([]);
     const [kanjiId, setKanjiId] = React.useState([]);
-    const [counterstate, setCounterState] = useRecoilState(counterStateAtom);
-    var counter = 0;
+    // const [counterstate, setCounterState] = useRecoilState(counterStateAtom);
 
     useEffect(() => {
         const unsubscribe = onSnapshot(doc(dbConfig, "kanji-site", id), (doc) => {
@@ -31,22 +30,23 @@ const Kanji_Card = ({id}) => {
         return () => unsubscribe()
     }, [id])
 
-    const setId = () => {
-        // const counter = counterstate;
-        // const counterplus = counterstate + 1;
-        // setCounterState(counterplus);
-        return counter++;
-    }
+    // var counter = counterstate;
+    // const setId = () => {
+    //     const counter = Object.freeze(counterstate);
+    //     // const counterplus = counterstate + 1;
+    //     setCounterState(counter+1);
+    //     return counter;
+        
+    //     //return counterstate;
+    // }
 
     return (
         <div>
             {/* <div>Stroke Order: {kanji.stroke_number}</div>
             <div>JLPT: {kanji.jlpt}</div> */}
             {typeof(kanji.word) !== 'undefined' && kanji.word != null ? Object.entries(kanji.word).map(([key,value]) => {
-                    // var counter = counterstate;
-                    // setCounterState(counter+1);
                     return (
-                        <Word_Card id={setId()} kanji={kanjiId} word={key} pronunciation={value.pronunciation} meaning={value.meaning}/>
+                        <Word_Card id={key} kanji={kanjiId} word={key} pronunciation={value.pronunciation} meaning={value.meaning}/>
                     );
                 }) : ""}
             <br/>
