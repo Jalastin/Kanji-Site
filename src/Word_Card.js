@@ -3,7 +3,7 @@ import { isKatakana, isRomaji, toHiragana } from "wanakana";
 import { useRecoilState } from "recoil";
 import { counterStateAtom } from "./counterAtom.js";
 
-const Word_Card = ({id, kanji, word, pronunciation, meaning}) => {
+const Word_Card = ({newIndex, words, id, kanji, word, pronunciation, meaning}) => {
     const [correct, setCorrect] = React.useState("Input the correct pronunciation here!");
     const [showmeaning, setShowMeaning] = React.useState("");
     const [counterstate, setCounterState] = useRecoilState(counterStateAtom);
@@ -15,15 +15,28 @@ const Word_Card = ({id, kanji, word, pronunciation, meaning}) => {
     // }, [])
     // console.log("counterstate: "+counterstate);
     useEffect(() => {
-      console.log(typeof counterstate);
+      console.log("words", words);
+      // console.log("words[0][0]", words[0][0]);
+      console.log(words[newIndex][0]);
+      if (newIndex - 1 >= 0) {
+        console.log(words[newIndex-1][0]);
+        setPrev(words[newIndex-1][0]);
+      }
+
+      if (newIndex + 1 < words.length) {
+        console.log(words[newIndex+1][0]);
+        setNext(words[newIndex+1][0]);
+      }
+
+      // console.log(typeof counterstate);
       // console.log(Object.keys(counterstate).length);
       const len = Object.values(counterstate).length;
       const otoa = Object.values(counterstate);
       const i = otoa.findIndex( counterstate => counterstate === id);
-      console.log("counterstate: "+counterstate);
-      console.log("otoa: "+otoa);
-      console.log("id: "+id);
-      console.log("i: "+i);
+      // console.log("counterstate: "+counterstate);
+      // console.log("otoa: "+otoa);
+      // console.log("id: "+id);
+      // console.log("i: "+i);
 
       for (let index in otoa) {
         // if (otoa[index+1] === id) {
@@ -32,11 +45,11 @@ const Word_Card = ({id, kanji, word, pronunciation, meaning}) => {
         //   setNext(otoa[index]);
         // }
 
-        if (index + 1 == i) {
-          setPrev(otoa[index]);
-        } else if (index - 1 == i) {
-          setNext(otoa[index]);
-        }
+        // if (index + 1 == i) {
+        //   setPrev(otoa[index]);
+        // } else if (index - 1 == i) {
+        //   setNext(otoa[index]);
+        // }
       }
 
       // if (i === 0) {

@@ -34,14 +34,17 @@ const Kanji_Card = ({id}) => {
         <div>
             {/* <div>Stroke Order: {kanji.stroke_number}</div>
             <div>JLPT: {kanji.jlpt}</div> */}
-            {typeof(kanji.word) !== 'undefined' && kanji.word != null ? Object.entries(kanji.word).map(([key,value]) => {
+            {typeof(kanji.word) !== 'undefined' && kanji.word != null ? Object.entries(kanji.word).map(([key,value], newIndex, words) => {
+                    // console.log("key", key);
+                    // console.log("value", value);
+                    // console.log("index", newIndex);
                     if (counterstate.includes(key) === false) {
                         // https://github.com/facebookexperimental/Recoil/issues/619
                         setCounterState([...counterstate,key,]);
                         console.log("counterstate: "+counterstate);
                     }
                     return (
-                        <Word_Card id={key} kanji={kanjiId} word={key} pronunciation={value.pronunciation} meaning={value.meaning}/>
+                        <Word_Card key={newIndex} newIndex={newIndex} words={words} id={key} kanji={kanjiId} word={key} pronunciation={value.pronunciation} meaning={value.meaning}/>
                     );
                 }) : ""}
             <br/>
